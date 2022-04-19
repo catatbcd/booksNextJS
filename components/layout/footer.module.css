@@ -1,0 +1,139 @@
+.containerfooter {
+    /*border: solid 1px green;*/
+    width: 100vw;
+  margin: 10px auto !important;
+  }
+  
+  .containerfooter h5{
+    color:#E5E5E5;
+    font-weight: Bold;
+    Font-size: 16px;
+    padding: 0 8px;
+  } 
+  
+  .containerfooter h6{
+    Font-size: 14px;
+    margin: 0px;
+    font-weight: 400px;
+  }
+  
+  .containerfooter h7{
+    Font-size: 12px;
+  }
+  
+  .containerfooter li{
+    /*border: solid 1px blue;*/
+    display: inline-block;
+    padding: 0 8px;
+  }
+  
+  .containerfooter ul{ 
+    /*border: solid 1px red;*/
+    padding-inline-start: 0px;
+    list-style: none;
+    padding-left: 0px;
+  }
+  
+  .footerlogo{
+    /*border: solid 1px blue;*/
+    padding: 32px 0 60px 0;
+    text-align: center;
+  }
+  
+  .containerfooter main{
+    /*border: solid 1px blue;*/
+    padding: 0;
+  }
+  
+  .containerfooter main::after{
+    content: "";
+    display: block;
+    clear: both;
+  }
+  
+  .footerlinks{
+    /*border: solid 1px yellow;*/
+    padding: 4px 0 30px 0;
+    width: 100%;
+    margin: 0;
+  }
+  
+  .footerredes{
+    /*border: solid 1px yellow;*/
+    padding: 32px 0 34px 0;
+    width: 100%;
+  }
+  
+  .copyright {
+    /*border: solid 1px yellow;*/
+    padding: 0 0 14px 0;
+  }
+  
+  
+  .containerfooter hr {
+    padding: 0;
+    border-width: 1px;
+  }
+  
+  @media screen and (min-width: 768px){
+    .copyright {
+    text-align: center;
+    padding: 0 8px 14px 8px;
+    }  
+    .footerlinks{
+    padding: 32px 0 0px 0;
+    width: 80%;
+    float: right;
+    text-align: right;
+    }
+    .footerredes{
+    padding: 70px 0 16px 0;
+    width: 100%;
+    text-align: center;
+    
+    }
+    .footerlogo{
+    padding: 32px 0 0px 0;
+    float: left;
+    width: 20%;
+    text-align: left;  
+    }
+    .containerfooter {
+    width: 80vw;
+    margin: 50px auto;
+    min-width: 794px;
+    }
+  }
+  
+  @media screen and (min-width: 1024px){
+    .footerlinks{
+    padding: 63px 0 30px 0;
+    float: left;
+    width: 80%;
+    text-align: left;
+    }
+    .footerredes{
+    padding: 63px 0 30px 0;
+    float: right;
+    width: 20%;
+    text-align: right;
+    }
+    .copyright {
+    text-align: right;
+    padding: 0 8px 34px 8px
+    }
+    .footerlogo{
+    padding: 54px 0 20px 0;
+    width: 100%;
+    text-align: left; 
+    }
+    .container {
+    max-width: 1200px;
+    }
+  }
+  
+  @media screen and (min-width: 1920px){
+    .container {
+    max-width: 1200px;
+    }
+  }

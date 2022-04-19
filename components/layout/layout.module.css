@@ -1,0 +1,33 @@
+/* Everything is a child of this node, so set its height to take up the full page or more, then set some padding at the bottom so your footer can slip into the gap. */
+.container {
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 100px;
+    display: grid;
+  grid-template-rows: auto 1fr auto;
+  }
+.header {
+    position: relative;
+    height: 60px;
+    width: 100%;
+   }
+   
+   .main {
+     text-align: center;
+     position: relative;
+   }
+   
+   /* Now set the height of your Footer equal to the padding that you left for it in your #root.  To make it stay at the bottom, you will set it to be absolutely positioned.  If Main grows larger, your Footer will move down to remain at the bottom of the page. */ 
+   .footer {
+    font-family: 'Montserrat', sans-serif;
+    color:#E5E5E5;
+    box-sizing: Border-box;
+    background: #030303;
+    margin: 0px;
+    width: 100vw;
+    height: auto;
+    position:absolute;
+    bottom:0;
+    text-align: center;
+    
+   }
