@@ -8,12 +8,14 @@ function MainMenu() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
   const [isOpen, setOpen] = useState(false);
+ 
   
   const handleToggle = () => {
     setOpen(!isOpen)
   }
  
   function logoutHandler() {
+    
     signOut();
   }
 
@@ -32,11 +34,7 @@ function MainMenu() {
   
   <ul className={isOpen ? classes.menusShow : ""}>
       <li className={classes.close}><span onClick={handleToggle}>×</span></li>
-      {!session && !loading && (
-            <li>
-              <Link href="/auth"><a>Login</a></Link>
-            </li>
-          )}
+      
           {session && (
             <>
               <li>
@@ -52,7 +50,7 @@ function MainMenu() {
           )}
           {session && (
             <li>
-              <button onClick={logoutHandler}>Logout</button>
+              <a onClick={logoutHandler}>Logout</a>
             </li>
           )}
    
