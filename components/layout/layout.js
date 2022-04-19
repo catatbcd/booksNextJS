@@ -6,16 +6,19 @@ import classes from "./layout.module.css";
 function Layout(props) {
   return (
     <Fragment>
-      <div className={classes.container}>
-        {" "}
-        <header className={classes.header}>
+      <section className={classes.grid1}>
+        <div className={classes.item1}>
           <MainMenu />
-        </header>
-        <main className={classes.main}>{props.children}</main>
-        <footer className={classes.footer}>
+        </div>
+
+        <div className={classes.item2}>
+          <main className={classes.main}>{props.children}</main>
+        </div>
+
+        <div className={classes.item3}>
           <Footer />
-        </footer>
-      </div>
+        </div>
+      </section>
     </Fragment>
   );
 }

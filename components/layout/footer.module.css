@@ -2,6 +2,13 @@
     /*border: solid 1px green;*/
     width: 100vw;
   margin: 10px auto !important;
+  font-family: 'Montserrat', sans-serif;
+    color:#E5E5E5;
+    box-sizing: Border-box;
+    background: #030303;
+    text-align: center;
+    height: auto;
+    bottom:0;
   }
   
   .containerfooter h5{
