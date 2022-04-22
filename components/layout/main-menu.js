@@ -46,7 +46,7 @@ function MainMenu() {
           {session && (
             <>
               <li>
-                <Link href="/profile">
+                <Link href="/users/profile">
                   <a>Perfil</a>
                 </Link>
               </li>

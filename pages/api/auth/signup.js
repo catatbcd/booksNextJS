@@ -1,5 +1,7 @@
 import { hashPassword } from '../../../lib/auth';
 import { connectToDatabase } from '../../../lib/db';
+import { uuid } from 'uuidv4';
+
 
 async function handler(req, res) {
     if (req.method !== 'POST') {
@@ -22,7 +24,7 @@ async function handler(req, res) {
     });
     return;
   }
-
+  
   const client = await connectToDatabase();
 
   const db = client.db();
@@ -38,6 +40,7 @@ async function handler(req, res) {
   const hashedPassword = await hashPassword(password);
 
   const result = await db.collection('users').insertOne({
+    id: uuid(),
     email: email,
     password: hashedPassword,
   });

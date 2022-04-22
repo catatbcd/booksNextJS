@@ -5,8 +5,21 @@ import { verifyPassword } from "../../../lib/auth";
 import { connectToDatabase } from "../../../lib/db";
 
 export default NextAuth({
+  callbacks: {
+    session: async ({ session, token }) => {
+      if (session?.user) {
+        session.user.id = token.uid;
+      }
+      return session;
+    },
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token.uid = user.id;
+      }
+      return token;
+    },
+  },
   session: {
-    //jwt: true,
     strategy: "jwt",
   },
   providers: [
@@ -24,6 +37,7 @@ export default NextAuth({
           client.close();
           throw new Error("¡Usuario no encontrado!");
         }
+      
 
         const isValid = await verifyPassword(
           credentials.password,
@@ -34,8 +48,10 @@ export default NextAuth({
           client.close();
           throw new Error("¡Clave incorrecta!. No se pudo iniciar sesión");
         }
+        
         client.close();
-        return { email: user.email };
+
+        return user;
       },
     }),
   ],

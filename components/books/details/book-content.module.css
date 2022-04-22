@@ -1,0 +1,50 @@
+/* Section */
+.section {
+  clear: both;
+  margin: 0px;
+  padding: 0px;
+}
+/* Column */
+.col {
+  background: #eee;
+  display: block;
+  float:left;
+  margin: 1% 0 1% 1.6%;
+}
+.col:first-child { margin-left: 0 !important; }
+
+/* Row */
+.row:before,
+.row:after { content:""; display:table; }
+.row:after { clear:both;}
+.row { zoom:1; /* For IE 6/7 */ }
+
+/* Grid */
+.image{ width: 32.267%;
+  max-height: 180px;
+  background-color: Azure;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+.header{ width: 66.133% }
+.content{ 
+  width: 100%;
+  background-color: white;
+  padding: 20px;
+  margin-top: 20px; }
+.content p{
+  color:rgba(0,0,0,0.8);
+  font-family:arial;
+  letter-spacing:1px;
+  font-size: .9em;
+  text-align: justify;
+}
+
+/* Full Width below 768 pixels */
+@media only screen and (max-width: 768px) {
+  .col {  margin: 1% 0 1% 0%; }
+  .image{ width: 100%; }
+.header{ width: 100%;}
+.content{ width: 100% }
+  
+}

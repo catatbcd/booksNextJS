@@ -1,0 +1,17 @@
+
+
+  .title {
+    text-transform: uppercase;
+    min-height: 40px;
+    color: #121a2f!important;
+    line-height: 1;
+    font-weight: 700;
+    font-size: .9em;
+    display: flex!important;
+    outline: 0;
+      text-decoration: none;
+      background-color: transparent;
+  }
+
+
+
