@@ -1,6 +1,6 @@
 import { connectToDatabase, getAllDocuments } from "../../../lib/db";
-async function handler(req, res){
-    let client;
+async function handler(req, res) {
+  let client;
   try {
     client = await connectToDatabase();
   } catch (error) {
@@ -9,14 +9,13 @@ async function handler(req, res){
   }
   if (req.method === "GET") {
     try {
-    const documents = await getAllDocuments(client, "users", { _id: -1 });
+      const documents = await getAllDocuments(client, "users", { _id: -1 });
       res.status(200).json({ users: documents });
     } catch {
-      res.status(500).json({ message: " Error al obtener comentarios." });
+      res.status(500).json({ message: " Error al obtener los usuarios." });
     }
   }
   client.close();
-
 }
 
 export default handler;

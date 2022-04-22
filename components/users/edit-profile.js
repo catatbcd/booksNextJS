@@ -11,33 +11,29 @@ function EditProfile(props) {
   const { name, lastName, email, foto } = props.user;
   const [selected, setSelected] = useState();
   const [editFoto, setEditFoto] = useState(false);
-  const [fotoSrc, setFotoSrc] = useState(props.foto);
+  const [fotoSrc, setFotoSrc] = useState(foto);
   if (!fotoSrc) {
     setFotoSrc("https://randomuser.me/api/portraits/lego/0.jpg");
-  } 
-    const handleClick = radio => event => {setSelected(radio);
-      
-      setFotoSrc(radio);
-      setEditFoto(!editFoto)
-  };
-  
-useEffect(()=> {
-  if(!editFoto){
-    setFotoSrc(fotoSrc);
   }
-  
-}, [editFoto, fotoSrc]);
-// page will reload whenever data is updated.
+  const handleClick = (radio) => (event) => {
+    setSelected(radio);
 
-  
- 
+    setFotoSrc(radio);
+    setEditFoto(!editFoto);
+  };
+
+  useEffect(() => {
+    if (!editFoto) {
+      setFotoSrc(fotoSrc);
+    }
+  }, [editFoto, fotoSrc]);
+  // page will reload whenever data is updated.
 
   const nameRef = useRef();
   const lastNameRef = useRef();
   const emailRef = useRef();
 
   async function submitHandler(event) {
-    
     event.preventDefault();
     const enteredNameRef = nameRef.current.value;
     const enteredLastNameRef = lastNameRef.current.value;
@@ -49,14 +45,15 @@ useEffect(()=> {
         name: enteredNameRef,
         lastName: enteredLastNameRef,
         email: enteredEmailRef,
-        foto: selected
+        foto: selected,
       });
 
-      toast.success(result.message);
+      props.setResult(result.message);
+      props.setError(false);
       props.loading(true);
       props.showEdit();
     } catch (error) {
-      toast.error(error.message);
+      props.setError(error.message);
     }
   }
   return (
@@ -145,19 +142,17 @@ useEffect(()=> {
                         width={150}
                         height={150}
                       />
-                      <Button 
-                      text="Cambiar Avatar"
-                      color="gray"
-                      form="circular"
+                      <Button
+                        text="Cambiar Avatar"
+                        color="gray"
+                        form="circular"
                         onClick={() => setEditFoto(true)}
-                       
                       />
-                       
                     </div>
                   ) : (
                     <div>
                       <Avatar
-                      onClick={handleClick}
+                        onClick={handleClick}
                         class={classes.img}
                         value="https://randomuser.me/api/portraits/lego/0.jpg"
                         src="https://randomuser.me/api/portraits/lego/0.jpg"
@@ -171,14 +166,14 @@ useEffect(()=> {
                         alt=""
                       />
                       <Avatar
-                      onClick={handleClick}
+                        onClick={handleClick}
                         class={classes.img}
                         value="https://randomuser.me/api/portraits/lego/2.jpg"
                         src="https://randomuser.me/api/portraits/lego/2.jpg"
                         alt=""
                       />
                       <Avatar
-                      onClick={handleClick}
+                        onClick={handleClick}
                         class={classes.img}
                         value="https://randomuser.me/api/portraits/lego/3.jpg"
                         src="https://randomuser.me/api/portraits/lego/3.jpg"
@@ -186,7 +181,7 @@ useEffect(()=> {
                       />
 
                       <Avatar
-                      onClick={handleClick}
+                        onClick={handleClick}
                         class={classes.img}
                         value="https://randomuser.me/api/portraits/lego/4.jpg"
                         src="https://randomuser.me/api/portraits/lego/4.jpg"
@@ -194,7 +189,7 @@ useEffect(()=> {
                       />
 
                       <Avatar
-                      onClick={handleClick}
+                        onClick={handleClick}
                         class={classes.img}
                         value="https://randomuser.me/api/portraits/lego/5.jpg"
                         src="https://randomuser.me/api/portraits/lego/5.jpg"
@@ -202,7 +197,7 @@ useEffect(()=> {
                       />
 
                       <Avatar
-                      onClick={handleClick}
+                        onClick={handleClick}
                         class={classes.img}
                         value="https://randomuser.me/api/portraits/lego/6.jpg"
                         src="https://randomuser.me/api/portraits/lego/6.jpg"
@@ -210,14 +205,14 @@ useEffect(()=> {
                       />
 
                       <Avatar
-                      onClick={handleClick}
+                        onClick={handleClick}
                         class={classes.img}
                         value="https://randomuser.me/api/portraits/lego/7.jpg"
                         src="https://randomuser.me/api/portraits/lego/7.jpg"
                         alt=""
                       />
                       <Avatar
-                      onClick={handleClick}
+                        onClick={handleClick}
                         class={classes.img}
                         value="https://randomuser.me/api/portraits/lego/8.jpg"
                         src="https://randomuser.me/api/portraits/lego/8.jpg"
@@ -231,12 +226,15 @@ useEffect(()=> {
           </div>
         </div>
 
-        <Button text="enviar"
-        color="green"
-        form="block" form1="circular"
-        />
+        <Button text="enviar" color="green" form="block" form1="circular" />
       </form>
-      <Button onClick={props.buttonX} text="Cancelar" color="red" form="block" form1="circular"/>
+      <Button
+        onClick={props.buttonX}
+        text="Cancelar"
+        color="red"
+        form="block"
+        form1="circular"
+      />
     </div>
   );
 }

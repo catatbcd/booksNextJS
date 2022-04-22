@@ -1,9 +1,8 @@
-import classes from './list-users.module.css';
-
+import classes from "./list-users.module.css";
 
 function UsersList(props) {
   return (
-    <table className={`${classes.table} ${classes.tablebordered}`} >
+    <table className={`${classes.table} ${classes.tablebordered}`}>
       <caption>{props.caption}</caption>
       <thead>
         <tr>
@@ -24,7 +23,7 @@ function UsersList(props) {
                 </td>
                 <td>
                   <div>
-                    <div className={classes.titleth}  data-title="Email: " />
+                    <div className={classes.titleth} data-title="Email: " />
                     {u.email}
                   </div>
                 </td>

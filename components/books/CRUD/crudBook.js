@@ -1,11 +1,11 @@
 import {Fragment} from 'react';
 import Button from '../../ui/button';
-function CRUDBook(){
+function CRUDBook(props){
     return(
         <Fragment >
             <Button text="Agregar a favoritos" color="green"/>
             <Button text="Eliminar" color="red"/>
-            <Button text="Editar" color="blue"/>
+            <Button onClick={props.edit} text="Editar" color="blue"/>
         </Fragment>
     );
 }

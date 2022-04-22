@@ -3,6 +3,8 @@ import { getSession } from "next-auth/react";
 import EditProfile from "../../components/users/edit-profile";
 import Profile from "../../components/users/profile";
 import ChangePass from "../../components/users/change-pass";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 async function changePasswordHandler(passwordData) {
   const response = await fetch("/api/users/change-pass", {
@@ -45,23 +47,32 @@ export default function UserPage(props) {
   const [data, setData] = useState([]);
   const [showEdit, setShowEdit] = useState(false);
   const [showChangePass, setShowChangePass] = useState(false);
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState(null);
   const id = props.session.user.id;
-  
+
   function handlerShow() {
     setShowEdit(!showEdit);
     setShowChangePass(false);
   }
-  
+
   function handlerShowChangePass() {
     setShowChangePass(!showChangePass);
     setShowEdit(false);
   }
-  
+
   useEffect(() => {
+    if (result) {
+      toast.success(result);
+    }
+
+    if (error) {
+      toast.error(error);
+    }
     if (isLoading) {
       retrieveProfile();
     }
-  }, [data, isLoading]);
+  }, [data, isLoading, result, error]);
 
   const retrieveProfile = () => {
     fetch("/api/users/profile", {
@@ -72,27 +83,28 @@ export default function UserPage(props) {
       },
     })
       .then((response) => response.json())
+      .catch((error) => setError(error))
       .then((data) => {
         setIsLoading(!isLoading);
         setData(data.user);
-        console.log("Lista de ventas cargada desde la base de datos");
-        console.log(data.user);
-      }, (error) => {setIsLoading(true)});
+      });
   };
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
-
   return (
     <div>
+      <ToastContainer></ToastContainer>
       {!showEdit ? (
         <Profile
           user={data}
           button={handlerShow}
           buttonPass={handlerShowChangePass}
           show={showChangePass}
+          setResult={setResult}
+          setError={setError}
         />
       ) : (
         <EditProfile
@@ -101,15 +113,17 @@ export default function UserPage(props) {
           onChangeProfile={changeProfileHandler}
           showEdit={handlerShow}
           loading={setIsLoading}
-          
+          setResult={setResult}
+          setError={setError}
         />
       )}
       {showChangePass ? (
         <ChangePass
           buttonX={handlerShowChangePass}
-          show={showChangePass}
           onChangePassword={changePasswordHandler}
           loading={setIsLoading}
+          setResult={setResult}
+          setError={setError}
         />
       ) : (
         ""

@@ -40,7 +40,6 @@ async function handler(req, res) {
       client.close();
       return;
     }
-
     const result = await booksCollection.updateOne(
       { id: bookId },
       {
@@ -61,12 +60,7 @@ async function handler(req, res) {
 
     client.close();
     res.status(200).json({ message: "¡Libro actualizado!" });
-    try {
-      const document = await findOneDocument(client, "books", bookId);
-      res.status(200).json({ book: document, bookId: bookId });
-    } catch {
-      res.status(500).json({ message: " Error al obtener datos del libro." });
-    }
+ 
   }
   client.close();
 }

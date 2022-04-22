@@ -70,9 +70,19 @@ function Profile(props) {
           </div>
         </div>
       </div>{" "}
-      <Button onClick={props.button} text="Editar Perfil" color={"blue"} form={"circular"} />
+      <Button
+        onClick={props.button}
+        text="Editar Perfil"
+        color={"blue"}
+        form={"circular"}
+      />
       {!props.show ? (
-        <Button onClick={props.buttonPass} text="Cambiar Contraseña" color={'blue'} form={"circular"}/>
+        <Button
+          onClick={props.buttonPass}
+          text="Cambiar Contraseña"
+          color={"blue"}
+          form={"circular"}
+        />
       ) : (
         ""
       )}

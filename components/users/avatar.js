@@ -1,9 +1,13 @@
-
 import Image from "next/image";
 function Avatar(props) {
   return (
     <label class="avatars">
-      <input onClick={props.onClick(props.value)} type="radio" name="avatar" value={props.value} />
+      <input
+        onClick={props.onClick(props.value)}
+        type="radio"
+        name="avatar"
+        value={props.value}
+      />
       <Image
         src={props.src}
         alt={props.alt}

@@ -1,11 +1,9 @@
-import classes from "./profile.module.css"
+import classes from "./profile.module.css";
 import { FaLock, FaKey } from "react-icons/fa";
-import {Fragment, useRef} from 'react';
+import { Fragment, useRef } from "react";
 import Button from "../ui/button";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
-function ChangePass (props){
+function ChangePass(props) {
   const oldPasswordRef = useRef();
   const newPasswordRef = useRef();
 
@@ -17,29 +15,24 @@ function ChangePass (props){
 
     // optional: Add validation
     try {
-      const result = await  props.onChangePassword({
+      const result = await props.onChangePassword({
         oldPassword: enteredOldPassword,
-        newPassword: enteredNewPassword
+        newPassword: enteredNewPassword,
       });
 
-      toast.success(result.message);
-      console.log(result.message);
+      props.setResult(result.message);
+      props.setError(false);
       props.loading(true);
       props.buttonX();
     } catch (error) {
-      toast.error(error.message);
+      props.setError(error.message);
     }
-   
-    
   }
-return (
-    <Fragment >
-        <ToastContainer></ToastContainer>
-        <form onSubmit={submitHandler}>
-       
+  return (
+    <Fragment>
+      <form onSubmit={submitHandler}>
         <div>
           <div className={classes.c}>
-         
             <hr />
             <div className={classes.c2}>
               <h4 className={classes.blue}>
@@ -71,7 +64,7 @@ return (
                     <span>
                       {" "}
                       <input
-                        id='old-password' 
+                        id="old-password"
                         ref={oldPasswordRef}
                         type="password"
                         required
@@ -79,18 +72,20 @@ return (
                     </span>
                   </div>
                 </div>
-           
               </div>
             </div>
-    
           </div>
         </div>
 
-        <Button text="Cambiar Contraseña" color ="green" form="circular"/>
-    </form>
-    <Button onClick={props.buttonX} text="Cancelar" color="red" form="circular"/>
+        <Button text="Cambiar Contraseña" color="green" form="circular" />
+      </form>
+      <Button
+        onClick={props.buttonX}
+        text="Cancelar"
+        color="red"
+        form="circular"
+      />
     </Fragment>
-    
-);
+  );
 }
 export default ChangePass;
