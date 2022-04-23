@@ -51,7 +51,7 @@ function MainMenu() {
                 </Link>
               </li>
               <li>
-                <Link href="/users/books/">
+                <Link href="/users/favorites">
                   <a>Mis Libros</a>
                 </Link>
               </li>

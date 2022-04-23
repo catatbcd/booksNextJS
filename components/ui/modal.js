@@ -8,9 +8,8 @@ function Modal(props) {
         try {
           const result = await props.ok(props.id);
            props.setResult(result.message);
-           router.replace("/books");
-
-         
+           router.replace(props.url);
+      
           
         } catch (error) {
           props.setError(error.message);

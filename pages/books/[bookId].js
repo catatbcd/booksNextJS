@@ -6,7 +6,7 @@ import Modal from "../../components/ui/modal";
 import Button from "../../components/ui/button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useSession } from "next-auth/react";
 
 async function handlerDelete(id) {
   const response = await fetch("/api/books/" + id, {
@@ -21,8 +21,26 @@ async function handlerDelete(id) {
 
   return data;
 }
+async function handlerFavorite(id) {
+  
+  const response = await fetch("/api/users", {
+    method: "PATCH",
+    body: JSON.stringify(id),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+console.log("favorite")
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "¡Algo salió mal!");
+  }
+
+  return data;
+}
 async function handlerEdit(bookData) {
-  const response = await fetch("/api/books/"+ bookData.id, {
+  const response = await fetch("/api/books/" + bookData.id, {
     method: "PATCH",
     body: JSON.stringify(bookData),
     headers: {
@@ -40,6 +58,7 @@ async function handlerEdit(bookData) {
 }
 
 export default function BookPage() {
+  const { data: session, status } = useSession();
   const router = useRouter();
   const bookId = router.query.bookId;
 
@@ -49,8 +68,12 @@ export default function BookPage() {
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState(null);
   const [result, setResult] = useState(null);
-  
-
+  const [textModal, setTextModal] =useState("");
+  const [colorModal, setColorModal] =useState("");
+  const [titleModal, setTitleModal] =useState("");
+  const [bodyModal, setBodyModal] =useState("");
+  const [okModal, setOkModal] =useState("");
+   
   function handlerModal() {
     setShowModal(!showModal);
   }
@@ -78,44 +101,68 @@ export default function BookPage() {
   function handlerShowEdit() {
     setEditBook(!editBook);
   }
-  console.log(data);
-  if(!data){
+  function modalDelete(){
+    setTextModal("borrar");
+    setColorModal("green");
+    setTitleModal("Eliminar Libro");
+    setBodyModal("¿Esta seguro de que desea Eliminar este libro?");
+    setOkModal(handlerDelete);
+    handlerModal();
+    
+  }
+  function modalFavorite(){
+    setTextModal("ok");
+    setColorModal("green");
+    setTitleModal("Agregar a favoritos");
+    setBodyModal("¿Esta seguro de que desea agregar a favoritos este libro?");
+    setOkModal("favorite")
+    handlerModal();
+    
+  }
+  if (!data) {
     router.replace("/books");
-  }else{
-  return (
-    <div>
+  } else {
+    return (
+      <div>
         <ToastContainer></ToastContainer>
-      <Modal
-        id={bookId}
-        text="borrar"
-        color="green"
-        buttonX={handlerModal}
-        modalTitle="Eliminar Libro"
-        modalBody="¿Esta seguro de que desea Eliminar este libro?"
-        show={showModal}
-        ok={handlerDelete}
-        setResult={setResult}
-        setError={setError}
-      />
-
-      {!editBook ? (
-        <div>
-          <Button text="Agregar a favoritos" color="green" />
-          <Button onClick={handlerModal} text="Eliminar" color="red" />
-          <Button onClick={handlerShowEdit} text="Editar" color="blue" />
-
-          <BookContent book={data} />
-        </div>
-      ) : (
-        <BookEdit
-          book={data}
-          buttonX={handlerShowEdit}
-          result={setResult}
-          error={setError}
-          loading={setIsLoading}
-          edit={handlerEdit}
+        <Modal
+          id={okModal==="delete" ? (bookId): ({idBook: bookId , idUser:session.user.id})} 
+          url={okModal==="delete" ? ("/books"): ("users/favorites")} 
+          text={textModal} 
+                   color={colorModal}
+          buttonX={handlerModal}
+          modalTitle={titleModal}
+          modalBody={bodyModal}
+          show={showModal}
+          ok={okModal==="delete" ? handlerDelete: handlerFavorite}
+          setResult={setResult}
+          setError={setError}
         />
-      )}
-    </div>
-  );}
+
+        {!editBook ? (
+          <div>
+            {session && session.user.rol === "admin" ? (
+              <div>
+                <Button onClick={modalDelete} text="Eliminar" color="red" />
+                <Button onClick={handlerShowEdit} text="Editar" color="blue" />
+              </div>
+            ) : (
+              <Button onClick={modalFavorite} text="Agregar a favoritos" color="green" />
+            )}
+
+            <BookContent book={data} />
+          </div>
+        ) : (
+          <BookEdit
+            book={data}
+            buttonX={handlerShowEdit}
+            result={setResult}
+            error={setError}
+            loading={setIsLoading}
+            edit={handlerEdit}
+          />
+        )}
+      </div>
+    );
+  }
 }

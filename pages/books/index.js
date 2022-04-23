@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import BooksGrid from "../../components/books/books-grid";
 import BookAdd from "../../components/books/CRUD/book-add";
 import Button from "../../components/ui/button";
@@ -23,6 +24,7 @@ async function handlerAdd(bookData) {
   return data;
 }
 function BooksPage() {
+  const { data: session, status } = useSession();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [addBook, setAddBook] = useState(false);
@@ -52,22 +54,32 @@ function BooksPage() {
   if (isLoading) {
     return <p>Loading...</p>;
   }
-
   return (
     <div>
       <ToastContainer></ToastContainer>
-      {addBook ?( <BookAdd 
-      result={setResult}
-      error={setError}
-      loading={setIsLoading}
-      buttonX={handlerShowAdd}
-      add={handlerAdd}
-      />):(<div> <Button onClick={handlerShowAdd} text="Agregar Libro" form="circular" color="blue"  pos="right" /><h1>Catalogo de libros</h1>
-      
-      <BooksGrid books={data} /></div>)}
-     
-     
-       
+      {addBook ? (
+        <BookAdd
+          result={setResult}
+          error={setError}
+          loading={setIsLoading}
+          buttonX={handlerShowAdd}
+          add={handlerAdd}
+        />
+      ) : (
+        <div>
+          {" "}
+          
+          {session && session.user.rol==="admin" ?( <Button
+            onClick={handlerShowAdd}
+            text="Agregar Libro"
+            form="circular"
+            color="blue"
+            pos="right"
+          />):""}
+          <h1>Catalogo de libros</h1>
+          <BooksGrid books={data} />
+        </div>
+      )}
     </div>
   );
 }
