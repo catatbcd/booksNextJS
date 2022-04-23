@@ -7,6 +7,7 @@ import Button from "../../components/ui/button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 async function handlerDelete(id) {
   const response = await fetch("/api/books/" + id, {
     method: "DELETE",
@@ -77,6 +78,10 @@ export default function BookPage() {
   function handlerShowEdit() {
     setEditBook(!editBook);
   }
+  console.log(data);
+  if(!data){
+    router.replace("/books");
+  }else{
   return (
     <div>
         <ToastContainer></ToastContainer>
@@ -112,5 +117,5 @@ export default function BookPage() {
         />
       )}
     </div>
-  );
+  );}
 }

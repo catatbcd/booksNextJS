@@ -50,7 +50,6 @@ export default function UserPage(props) {
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
   const id = props.session.user.id;
-
   function handlerShow() {
     setShowEdit(!showEdit);
     setShowChangePass(false);

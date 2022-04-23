@@ -3,11 +3,10 @@ import classes from "./books-grid.module.css";
 
 function BooksGrid(props) {
   const { books } = props;
-  console.log(books);
   return (
     <ul className={classes.grid}>
-      {books.map((book) => (
-        <BookItem key={book.slug} book={book} />
+      {books.map((book, index) => (
+        <BookItem key={index} book={book} />
       ))}
     </ul>
   );

@@ -39,6 +39,13 @@
   border-radius: 50em !important;
 }
 
+.right{
+  float:right;
+}
+.left{
+  float: left;
+}
+
 /* Colours */
 .red {
   background-color: #d55050;

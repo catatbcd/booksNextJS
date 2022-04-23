@@ -19,6 +19,9 @@ function BookContent(props) {
   const [src, setSrc] = useState(thumbnailUrl);
   const [date, setDate] = useState(publishedDate);
   const [description, setDescription] = useState(longDescription);
+  if(!src){
+    setSrc("https://randomuser.me/api/portraits/lego/5.jpg");
+  }
   if (!description && shortDescription) {
     setDescription(shortDescription);
   } else {

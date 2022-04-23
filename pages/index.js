@@ -11,7 +11,7 @@ export default function Home() {
   useEffect(() => {
     getSession().then((session) => {
       if (session) {
-        console.log(session);
+       
         router.replace("/books");
       } else {
         setIsLoading(false);

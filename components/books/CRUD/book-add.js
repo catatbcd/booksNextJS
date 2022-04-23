@@ -2,20 +2,11 @@ import classes from "../details/book-content.module.css";
 import { useState, useRef } from "react";
 import Image from "next/image";
 import Button from "../../ui/button";
-function BookEdit(props) {
-  const {
-    id,
-    title,
-    authors,
-    thumbnailUrl,
-    shortDescription,
-    longDescription,
-    publishedDate,
-    isbn,
-    categories,
-    pageCount,
-  } = props.book;
-  const [src, setSrc] = useState(thumbnailUrl);
+import { useRouter } from "next/router";
+function BookAdd(props) {
+  
+  const router = useRouter();
+  const [src, setSrc] = useState("https://randomuser.me/api/portraits/lego/5.jpg");
   const [editImage, setEditImage] = useState(false);
   const titleRef = useRef();
   const authorsRef = useRef();
@@ -33,13 +24,11 @@ function BookEdit(props) {
   if (!src) {
     handlerEditImage();
   }
-  let formattedDate;
-  if (publishedDate) {
-    formattedDate = new Date(publishedDate).toLocaleDateString("en-CA");
-  } else {
-    formattedDate = null;
-  }
-  console.log(formattedDate)
+  let date = new Date();
+ date = date.getFullYear()+ '-' + String(date.getMonth() + 1).padStart(2, '0')+'-'+String(date.getDate()).padStart(2, '0') ;
+
+ let formattedDate = new Date(date).toLocaleDateString("en-CA");
+
   async function submitHandler(event) {
     event.preventDefault();
   
@@ -59,8 +48,7 @@ function BookEdit(props) {
     const arrayAuthors = enteredAuthorsRef.split(',');
     const arrayCatagories = enteredCategoriesRef.split(',');
     try {
-      const result = await props.edit({
-        id:id,
+      const result = await props.add({
         title: enteredTitleRef,
         authors:arrayAuthors,
         thumbnailUrl: src,
@@ -75,8 +63,7 @@ function BookEdit(props) {
 
       props.result(result.message);
       props.error(null);
-      props.loading(true);
-      props.buttonX();
+      router.replace("/books/"+result.id);
       
     } catch (error) {
       props.error(error.message);
@@ -88,7 +75,7 @@ function BookEdit(props) {
         <div className={`${classes.col} ${classes.image}`}>
           {!editImage ? (
             <div>
-              <Image src={src} alt={title} width={200} height={150} />
+              <Image src={src} alt="Portada" width={200} height={150} />
 
               <Button
                 text="Cambiar Imagen"
@@ -115,25 +102,25 @@ function BookEdit(props) {
           {" "}
           <div>
             {" "}
-            <label htmlFor="title">Titulo:</label>
-            <input ref={titleRef} defaultValue={title} type="text" name="title" />
+            <label htmlFor="title">* Titulo:</label>
+            <input ref={titleRef}  type="text" name="title" />
           </div>
           <div>
             {" "}
             <label htmlFor="isbn">isbn:</label>
-            <input ref={isbnRef} defaultValue={isbn} type="text" name="isbn" />
+            <input ref={isbnRef}  type="text" name="isbn" />
           </div>
           <div>
             {" "}
             <label htmlFor="pageCount">Numero de paginas:</label>
-            <input ref={pageCountRef} defaultValue={pageCount} type="number" name="pageCount" />
+            <input ref={pageCountRef}  type="number" name="pageCount" />
           </div>
           <div>
             {" "}
             <label htmlFor="publishedDate">Fecha de publicacion:</label>
             <input
+            defaultValue={formattedDate}
             ref={publishedDateRef}
-              defaultValue={formattedDate}
               type="date"
               name="publishedDate"
             />
@@ -141,31 +128,31 @@ function BookEdit(props) {
           <div>
             {" "}
             <label htmlFor="authors">
-              Autores (ingrese el nombre de los autores separado por comas):
+              *Autores (Ingrese el nombre de los autores separado por comas):
             </label>
-            <input ref={authorsRef} defaultValue={authors} type="text" name="authors" />
+            <input ref={authorsRef}  type="text" name="authors" />
           </div>
           <div>
             {" "}
             <label htmlFor="categories">categorias:</label>
-            <input ref={categoriesRef} defaultValue={categories} type="text" name="categories" />
+            <input ref={categoriesRef} type="text" name="categories" />
           </div>
         </div>
         <div className={`${classes.col} ${classes.content}`}>
           <h2>Descripción corta del libro</h2>
-          <textarea defaultValue={shortDescription} ref={shortDescriptionRef} name="shortDescription" rows="10" cols="50">
+          <textarea  ref={shortDescriptionRef} name="shortDescription" rows="10" cols="50">
             
           </textarea>
           <h2>Descripción larga del libro</h2>
-          <textarea defaultValue={longDescription} ref={longDescriptionRef} name="longDescription" rows="10" cols="50">
+          <textarea  ref={longDescriptionRef} name="longDescription" rows="10" cols="50">
             
           </textarea>
         </div>
-        <Button text="Editar" color="blue" />
+        <Button text="Agregar" color="blue" />
       </form>
       <Button onClick={props.buttonX} text="Cancelar" color="red" />
     </div>
   );
 }
 
-export default BookEdit;
+export default BookAdd;

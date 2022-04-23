@@ -43,6 +43,7 @@ async function handler(req, res) {
     id: uuid(),
     email: email,
     password: hashedPassword,
+    roles: "user",
   });
 
   res.status(201).json({ message: 'Usuario creado!' });

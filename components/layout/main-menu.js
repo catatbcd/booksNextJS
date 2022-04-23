@@ -43,7 +43,7 @@ function MainMenu() {
             <span onClick={handleToggle}>×</span>
           </li>
 
-          {session && (
+          {session && session.user.roles === "user" && (
             <>
               <li>
                 <Link href="/users/profile">
@@ -53,6 +53,25 @@ function MainMenu() {
               <li>
                 <Link href="/users/books/">
                   <a>Mis Libros</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/books/">
+                  <a>Libreria</a>
+                </Link>
+              </li>
+            </>
+          )}
+          {session && session.user.roles === "admin" && (
+            <>
+              <li>
+                <Link href="/users/profile">
+                  <a>Perfil</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/users">
+                  <a>Usuarios</a>
                 </Link>
               </li>
               <li>

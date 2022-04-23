@@ -1,17 +1,22 @@
 import Button from "./button";
 import classes from "./modal.module.css";
+import { useRouter } from "next/router";
 
 function Modal(props) {
+  const router = useRouter();
     async function ok(){
         try {
           const result = await props.ok(props.id);
-            props.buttonX();
-          props.setResult(result.message);
+           props.setResult(result.message);
+           router.replace("/books");
+
+         
           
         } catch (error) {
           props.setError(error.message);
         }
       }
+      
   if (props.show) {
     return (
       <div className={classes.modal}>

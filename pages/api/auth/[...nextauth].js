@@ -10,12 +10,15 @@ export default NextAuth({
       if (session?.user) {
         session.user.id = token.uid;
       }
+      if (token?.roles) session.user.roles = token.roles;
+      
       return session;
     },
     jwt: async ({ user, token }) => {
       if (user) {
         token.uid = user.id;
       }
+      if (user?.roles) token.roles = user.roles;
       return token;
     },
   },
