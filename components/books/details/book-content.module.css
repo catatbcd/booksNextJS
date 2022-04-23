@@ -48,3 +48,19 @@
 .content{ width: 100% }
   
 }
+.desT{
+  
+  color: #121a2f!important;
+  font-size: 1.2em;
+  padding: 0!important;
+  -webkit-box-pack: justify!important;
+  -ms-flex-pack: justify!important;
+  justify-content: space-between!important;
+  display: -webkit-box!important;
+  display: -ms-flexbox!important;
+  display: flex!important;
+}
+.des{
+ color: #121a2f!important; line-height: normal;font-size: .8em; margin-bottom: 1.5rem!important;margin-top: 1rem!important;
+}
+

@@ -33,7 +33,6 @@ function BookContent(props) {
     formattedDate=null;
   }
 
-
   return (
     <div className={classes.section}>
       <div className={`${classes.col} ${classes.image}`}>
@@ -52,8 +51,9 @@ function BookContent(props) {
         />
       </div>
       {description ? (<div className={`${classes.col} ${classes.content}`}>
-        <h2>descripción del libro</h2>
-        <p>{description}</p>
+        <h2 className={classes.desT} >Descripción del libro</h2>
+        <div className={classes.des}>
+        <p>{description}</p></div>
       </div>):""}
     </div>
   );

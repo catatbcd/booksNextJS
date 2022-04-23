@@ -1,23 +1,57 @@
-import Image from 'next/image';
-
-import classes from './book-header.module.css';
+import classes from "./book-header.module.css";
 
 function BookHeader(props) {
-  const { title, authors,isbn, categories, pageCount, publishedDate} = props;
+  const { title, authors, isbn, categories, pageCount, publishedDate } = props;
 
   return (
-    <header >
-      <h1 className={classes.title}>{title}</h1>
-      <h2>{authors}</h2>
-      <div>
-          {isbn ? <div>ISBN: {isbn}</div>:""}
-          {categories.length !== 0 ? <div>Categorias: {categories}</div>:""}
-          {pageCount ? <div>Numero de paginas: {pageCount}</div>:""}
-          {publishedDate ? <div>fecha de publicacion: {publishedDate}</div>:""}
-          
-      </div>
-
+    <header>
+      <div className={classes.conT}><h1 className={classes.title}>{title}</h1></div>
       
+      <div className={classes.authors}>
+        {authors.map((u, index) => (
+          
+          <span key={index}>/{u}</span>
+        ))}
+      </div>
+      <div>
+        {isbn ? (
+          <div>
+            <div className={classes.dataT}>ISBN:</div>{" "}
+            <div className={classes.dataD}>{isbn}</div>
+          </div>
+        ) : (
+          ""
+        )}
+
+        {pageCount ? (
+          <div>
+            <div className={classes.dataT}>Número de páginas:</div>{" "}
+            <div className={classes.dataD}>{pageCount}</div>{" "}
+          </div>
+        ) : (
+          ""
+        )}
+        {publishedDate ? (
+          <div>
+            <div className={classes.dataT}>Fecha de publicación:</div>{" "}
+            <div className={classes.dataD}>{publishedDate}</div>{" "}
+          </div>
+        ) : (
+          ""
+        )}
+        {categories.length !== 0 ? (
+          <div>
+            <div className={classes.dataT}>Categorías:</div>{" "}
+            <div className={classes.dataD}>
+              {categories.map((u, index) => (
+                <span  key={index}>*{u}</span>
+              ))}
+            </div>{" "}
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
     </header>
   );
 }

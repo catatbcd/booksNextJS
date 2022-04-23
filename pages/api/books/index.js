@@ -9,7 +9,7 @@ async function handler(req, res){
   }
   if (req.method === "GET") {
     try {
-    const documents = await getAllDocuments(client, "books", { _id: -1 });
+    const documents = await getAllDocuments(client, "books", {title: 1 });
       res.status(200).json({ books: documents });
     } catch {
       res.status(500).json({ message: " Error al obtener comentarios." });
