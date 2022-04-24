@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import Head from "next/head";
+
+
 export default function UsersPage() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -35,8 +38,12 @@ export default function UsersPage() {
   return (
     <div>
       <ToastContainer></ToastContainer>
+      <Head>
+        <title>Lista de usuarios</title>
+        <meta name="description" content="Lista de usuarios registrados" />
+      </Head>
       <h1>Listado de usuarios</h1>
-      <UsersList data={data} />
+      <UsersList error={setError} result={setResult} data={data} />
     </div>
   );
 }

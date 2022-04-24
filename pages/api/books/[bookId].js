@@ -66,9 +66,9 @@ async function handler(req, res) {
   if(req.method==="DELETE"){
     try {
       const document = await findOneAndDelete(client, "books", bookId);
-      res.status(200).json({ delete: document });
+      res.status(200).json({ message: "Libro eliminado"});
     } catch {
-      res.status(500).json({ message: " Error al obtener datos del libro." });
+      res.status(500).json({ message: " Error al eliminar datos del libro." });
     }
 
   }

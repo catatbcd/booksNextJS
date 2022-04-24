@@ -6,6 +6,8 @@ import ChangePass from "../../components/users/change-pass";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import Head from "next/head";
+
 async function changePasswordHandler(passwordData) {
   const response = await fetch("/api/users/change-pass", {
     method: "PATCH",
@@ -96,6 +98,10 @@ export default function UserPage(props) {
   return (
     <div>
       <ToastContainer></ToastContainer>
+      <Head>
+        <title>Perfil de usuario</title>
+        <meta name="description" content="Datos del usuario" />
+      </Head>
       {!showEdit ? (
         <Profile
           user={data}

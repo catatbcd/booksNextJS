@@ -7,6 +7,7 @@ import Button from "../../components/ui/button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSession } from "next-auth/react";
+import Head from "next/head";
 
 async function handlerDelete(id) {
   const response = await fetch("/api/books/" + id, {
@@ -22,7 +23,6 @@ async function handlerDelete(id) {
   return data;
 }
 async function handlerFavorite(id) {
-  
   const response = await fetch("/api/users", {
     method: "PATCH",
     body: JSON.stringify(id),
@@ -30,7 +30,6 @@ async function handlerFavorite(id) {
       "Content-Type": "application/json",
     },
   });
-console.log("favorite")
   const data = await response.json();
 
   if (!response.ok) {
@@ -68,12 +67,12 @@ export default function BookPage() {
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState(null);
   const [result, setResult] = useState(null);
-  const [textModal, setTextModal] =useState("");
-  const [colorModal, setColorModal] =useState("");
-  const [titleModal, setTitleModal] =useState("");
-  const [bodyModal, setBodyModal] =useState("");
-  const [okModal, setOkModal] =useState("");
-   
+  const [textModal, setTextModal] = useState("");
+  const [colorModal, setColorModal] = useState("");
+  const [titleModal, setTitleModal] = useState("");
+  const [bodyModal, setBodyModal] = useState("");
+  const [okModal, setOkModal] = useState("");
+
   function handlerModal() {
     setShowModal(!showModal);
   }
@@ -101,23 +100,21 @@ export default function BookPage() {
   function handlerShowEdit() {
     setEditBook(!editBook);
   }
-  function modalDelete(){
+  function modalDelete() {
     setTextModal("borrar");
     setColorModal("green");
     setTitleModal("Eliminar Libro");
     setBodyModal("¿Esta seguro de que desea Eliminar este libro?");
     setOkModal(handlerDelete);
     handlerModal();
-    
   }
-  function modalFavorite(){
+  function modalFavorite() {
     setTextModal("ok");
     setColorModal("green");
     setTitleModal("Agregar a favoritos");
     setBodyModal("¿Esta seguro de que desea agregar a favoritos este libro?");
-    setOkModal("favorite")
+    setOkModal("favorite");
     handlerModal();
-    
   }
   if (!data) {
     router.replace("/books");
@@ -125,19 +122,29 @@ export default function BookPage() {
     return (
       <div>
         <ToastContainer></ToastContainer>
-        <Modal
-          id={okModal==="delete" ? (bookId): ({idBook: bookId , idUser:session.user.id})} 
-          url={okModal==="delete" ? ("/books"): ("users/favorites")} 
-          text={textModal} 
-                   color={colorModal}
-          buttonX={handlerModal}
-          modalTitle={titleModal}
-          modalBody={bodyModal}
-          show={showModal}
-          ok={okModal==="delete" ? handlerDelete: handlerFavorite}
-          setResult={setResult}
-          setError={setError}
-        />
+        <Head>
+          <title>{data.title}</title>
+          <meta name="description" content={data.description} />
+        </Head>
+        {session && (
+          <Modal
+            id={
+              okModal === "delete"
+                ? bookId
+                : { idBook: bookId, idUser: session.user.id }
+            }
+            url={okModal === "delete" ? "/books" : "users/favorites"}
+            text={textModal}
+            color={colorModal}
+            buttonX={handlerModal}
+            modalTitle={titleModal}
+            modalBody={bodyModal}
+            show={showModal}
+            ok={okModal === "delete" ? handlerDelete : handlerFavorite}
+            setResult={setResult}
+            setError={setError}
+          />
+        )}
 
         {!editBook ? (
           <div>
@@ -147,7 +154,11 @@ export default function BookPage() {
                 <Button onClick={handlerShowEdit} text="Editar" color="blue" />
               </div>
             ) : (
-              <Button onClick={modalFavorite} text="Agregar a favoritos" color="green" />
+              <Button
+                onClick={modalFavorite}
+                text="Agregar a favoritos"
+                color="green"
+              />
             )}
 
             <BookContent book={data} />

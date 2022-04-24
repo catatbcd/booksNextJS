@@ -1,8 +1,8 @@
 import { getSession } from "next-auth/react";
-import {useState,useEffect} from 'react';
+import { useState, useEffect } from "react";
+
+import Head from "next/head";
 export default function UserBooksPage(props) {
-  
-  
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const [result, setResult] = useState(null);
@@ -40,31 +40,36 @@ export default function UserBooksPage(props) {
   if (isLoading) {
     return <p>Loading...</p>;
   }
-  console.log(data);
-    return (
-     <div>
-       <h1>Lista de libros del usuario</h1>
-       {data.favorites.map((u,index) => (
-         <div key={index}>
-           <a href={`books/${u}`}>/books/{u}</a>
-         </div>
-       ))}
-      </div>
-    )
+  return (
+    <div>
+      <Head>
+        <title>Libros Favoritos</title>
+      </Head>
+      <h1>Lista de libros del usuario</h1>
+
+      {data.favorites
+        ? data.favorites.map((u, index) => (
+            <div key={index}>
+              <a href={`../books/${u}`}>/books/{u}</a>
+            </div>
+          ))
+        : "No hay libros guardados en favoritos"}
+    </div>
+  );
+}
+export async function getServerSideProps(context) {
+  const session = await getSession({ req: context.req });
+
+  if (session) {
+    return {
+      props: { session },
+    };
+  } else {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
   }
-  export async function getServerSideProps(context) {
-    const session = await getSession({ req: context.req });
-  
-    if (session) {
-      return {
-        props: { session },
-      };
-    } else {
-      return {
-        redirect: {
-          destination: "/",
-          permanent: false,
-        },
-      };
-    }
-  }
+}

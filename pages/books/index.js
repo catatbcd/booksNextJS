@@ -6,6 +6,8 @@ import Button from "../../components/ui/button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import Head from "next/head";
+
 async function handlerAdd(bookData) {
   const response = await fetch("/api/books", {
     method: "POST",
@@ -57,6 +59,9 @@ function BooksPage() {
   return (
     <div>
       <ToastContainer></ToastContainer>
+      <Head>
+        <title>Catalogo de libros</title>
+      </Head>
       {addBook ? (
         <BookAdd
           result={setResult}
@@ -68,14 +73,17 @@ function BooksPage() {
       ) : (
         <div>
           {" "}
-          
-          {session && session.user.rol==="admin" ?( <Button
-            onClick={handlerShowAdd}
-            text="Agregar Libro"
-            form="circular"
-            color="blue"
-            pos="right"
-          />):""}
+          {session && session.user.rol === "admin" ? (
+            <Button
+              onClick={handlerShowAdd}
+              text="Agregar Libro"
+              form="circular"
+              color="blue"
+              pos="right"
+            />
+          ) : (
+            ""
+          )}
           <h1>Catalogo de libros</h1>
           <BooksGrid books={data} />
         </div>
