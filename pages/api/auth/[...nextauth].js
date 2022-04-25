@@ -11,7 +11,7 @@ export default NextAuth({
         session.user.id = token.uid;
       }
       if (token?.roles) session.user.roles = token.roles;
-      
+
       return session;
     },
     jwt: async ({ user, token }) => {
@@ -40,7 +40,6 @@ export default NextAuth({
           client.close();
           throw new Error("¡Usuario no encontrado!");
         }
-      
 
         const isValid = await verifyPassword(
           credentials.password,
@@ -51,7 +50,7 @@ export default NextAuth({
           client.close();
           throw new Error("¡Clave incorrecta!. No se pudo iniciar sesión");
         }
-        
+
         client.close();
 
         return user;

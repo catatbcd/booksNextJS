@@ -4,19 +4,17 @@ import { useRouter } from "next/router";
 
 function Modal(props) {
   const router = useRouter();
-    async function ok(){
-        try {
-          const result = await props.ok(props.id);
-           props.setResult(result.message);
-           if(props.url) router.replace(props.url);
-           else props.buttonX();
-      
-          
-        } catch (error) {
-          props.setError(error.message);
-        }
-      }
-      
+  async function ok() {
+    try {
+      const result = await props.ok(props.id);
+      props.setResult(result.message);
+      if (props.url) router.replace(props.url);
+      else props.buttonX();
+    } catch (error) {
+      props.setError(error.message);
+    }
+  }
+
   if (props.show) {
     return (
       <div className={classes.modal}>

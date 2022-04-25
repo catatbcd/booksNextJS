@@ -8,59 +8,82 @@
 .col {
   background: #eee;
   display: block;
-  float:left;
+  float: left;
   margin: 1% 0 1% 1.6%;
 }
-.col:first-child { margin-left: 0 !important; }
+.col:first-child {
+  margin-left: 0 !important;
+}
 
 /* Row */
 .row:before,
-.row:after { content:""; display:table; }
-.row:after { clear:both;}
-.row { zoom:1; /* For IE 6/7 */ }
+.row:after {
+  content: "";
+  display: table;
+}
+.row:after {
+  clear: both;
+}
+.row {
+  zoom: 1; /* For IE 6/7 */
+}
 
 /* Grid */
-.image{ width: 32.267%;
+.image {
+  width: 32.267%;
   max-height: 180px;
   background-color: Azure;
   display: flex;
   align-items: center;
-  justify-content: center; }
-.header{ width: 66.133% }
-.content{ 
+  justify-content: center;
+}
+.header {
+  width: 66.133%;
+}
+.content {
   width: 100%;
   background-color: white;
   padding: 20px;
-  margin-top: 20px; }
-.content p{
-  color:rgba(0,0,0,0.8);
-  font-family:arial;
-  letter-spacing:1px;
-  font-size: .9em;
+  margin-top: 20px;
+}
+.content p {
+  color: rgba(0, 0, 0, 0.8);
+  font-family: arial;
+  letter-spacing: 1px;
+  font-size: 0.9em;
   text-align: justify;
 }
 
 /* Full Width below 768 pixels */
 @media only screen and (max-width: 768px) {
-  .col {  margin: 1% 0 1% 0%; }
-  .image{ width: 100%; }
-.header{ width: 100%;}
-.content{ width: 100% }
-  
+  .col {
+    margin: 1% 0 1% 0%;
+  }
+  .image {
+    width: 100%;
+  }
+  .header {
+    width: 100%;
+  }
+  .content {
+    width: 100%;
+  }
 }
-.desT{
-  
-  color: #121a2f!important;
+.desT {
+  color: #121a2f !important;
   font-size: 1.2em;
-  padding: 0!important;
-  -webkit-box-pack: justify!important;
-  -ms-flex-pack: justify!important;
-  justify-content: space-between!important;
-  display: -webkit-box!important;
-  display: -ms-flexbox!important;
-  display: flex!important;
+  padding: 0 !important;
+  -webkit-box-pack: justify !important;
+  -ms-flex-pack: justify !important;
+  justify-content: space-between !important;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
 }
-.des{
- color: #121a2f!important; line-height: normal;font-size: .8em; margin-bottom: 1.5rem!important;margin-top: 1rem!important;
+.des {
+  color: #121a2f !important;
+  line-height: normal;
+  font-size: 0.8em;
+  margin-bottom: 1.5rem !important;
+  margin-top: 1rem !important;
 }
-

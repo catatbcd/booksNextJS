@@ -40,14 +40,13 @@ function Book(props) {
           <div>
             <div className={classes.title}>{title}</div>
             <div className={classes.autor}>
-                <div>isbn: {isbn} </div>
-                <div>Autores: {authors}</div>
-                <hr/><div>
-              <p>{shortDescription}</p>
+              <div>isbn: {isbn} </div>
+              <div>Autores: {authors}</div>
+              <hr />
+              <div>
+                <p>{shortDescription}</p>
+              </div>
             </div>
-            </div>
-            
-            
           </div>
 
           <div></div>

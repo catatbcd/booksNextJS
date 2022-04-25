@@ -5,11 +5,12 @@ function BookHeader(props) {
 
   return (
     <header>
-      <div className={classes.conT}><h1 className={classes.title}>{title}</h1></div>
-      
+      <div className={classes.conT}>
+        <h1 className={classes.title}>{title}</h1>
+      </div>
+
       <div className={classes.authors}>
         {authors.map((u, index) => (
-          
           <span key={index}>/{u}</span>
         ))}
       </div>
@@ -44,7 +45,7 @@ function BookHeader(props) {
             <div className={classes.dataT}>Categorías:</div>{" "}
             <div className={classes.dataD}>
               {categories.map((u, index) => (
-                <span  key={index}>*{u}</span>
+                <span key={index}>*{u}</span>
               ))}
             </div>{" "}
           </div>

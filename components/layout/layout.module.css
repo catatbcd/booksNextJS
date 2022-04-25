@@ -6,15 +6,14 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto 1fr auto;
   grid-gap: 5px 5px;
-  
-  grid-template-areas: "header   header   header"
-                       "main     main     main"
-                       "footer   footer   footer";
+
+  grid-template-areas:
+    "header   header   header"
+    "main     main     main"
+    "footer   footer   footer";
 }
 
 /* items */
-
-
 
 /* specific item styles */
 
@@ -25,12 +24,10 @@
 }
 .item2 {
   grid-area: main;
-  }
+}
 .item3 {
   background-color: black;
-    grid-area: footer;
-    width: 100vw;
-    height: auto;
+  grid-area: footer;
+  width: 100vw;
+  height: auto;
 }
-
-

@@ -39,16 +39,16 @@ function BookEdit(props) {
   } else {
     formattedDate = null;
   }
-  console.log(formattedDate)
+  console.log(formattedDate);
   async function submitHandler(event) {
     event.preventDefault();
-  
+
     const enteredTitleRef = titleRef.current.value;
     const enteredAuthorsRef = authorsRef.current.value;
-    if(editImage){
-     setSrc(thumbnailUrlRef.current.value)
+    if (editImage) {
+      setSrc(thumbnailUrlRef.current.value);
     }
-    
+
     const enteredShortDescriptionRef = shortDescriptionRef.current.value;
     const enteredLongDescriptionRef = longDescriptionRef.current.value;
     const enteredPublishedDateRef = publishedDateRef.current.value;
@@ -56,13 +56,13 @@ function BookEdit(props) {
     const enteredCategoriesRef = categoriesRef.current.value;
     const enteredPageCountRef = pageCountRef.current.value;
     // optional: Add validation
-    const arrayAuthors = enteredAuthorsRef.split(',');
-    const arrayCatagories = enteredCategoriesRef.split(',');
+    const arrayAuthors = enteredAuthorsRef.split(",");
+    const arrayCatagories = enteredCategoriesRef.split(",");
     try {
       const result = await props.edit({
-        id:id,
+        id: id,
         title: enteredTitleRef,
-        authors:arrayAuthors,
+        authors: arrayAuthors,
         thumbnailUrl: src,
         shortDescription: enteredShortDescriptionRef,
         longDescription: enteredLongDescriptionRef,
@@ -70,14 +70,12 @@ function BookEdit(props) {
         isbn: enteredIsbnRef,
         categories: arrayCatagories,
         pageCount: enteredPageCountRef,
-        
       });
 
       props.result(result.message);
       props.error(null);
       props.loading(true);
       props.buttonX();
-      
     } catch (error) {
       props.error(error.message);
     }
@@ -101,7 +99,7 @@ function BookEdit(props) {
             <div>
               {" "}
               <label htmlFor="src">agregar imagen:</label>
-              <input  ref={thumbnailUrlRef} type="file" id="src" name="src" />
+              <input ref={thumbnailUrlRef} type="file" id="src" name="src" />
               <Button
                 text="Seleccionar"
                 color="blue"
@@ -116,7 +114,12 @@ function BookEdit(props) {
           <div>
             {" "}
             <label htmlFor="title">Titulo:</label>
-            <input ref={titleRef} defaultValue={title} type="text" name="title" />
+            <input
+              ref={titleRef}
+              defaultValue={title}
+              type="text"
+              name="title"
+            />
           </div>
           <div>
             {" "}
@@ -126,13 +129,18 @@ function BookEdit(props) {
           <div>
             {" "}
             <label htmlFor="pageCount">Numero de paginas:</label>
-            <input ref={pageCountRef} defaultValue={pageCount} type="number" name="pageCount" />
+            <input
+              ref={pageCountRef}
+              defaultValue={pageCount}
+              type="number"
+              name="pageCount"
+            />
           </div>
           <div>
             {" "}
             <label htmlFor="publishedDate">Fecha de publicacion:</label>
             <input
-            ref={publishedDateRef}
+              ref={publishedDateRef}
               defaultValue={formattedDate}
               type="date"
               name="publishedDate"
@@ -143,23 +151,41 @@ function BookEdit(props) {
             <label htmlFor="authors">
               Autores (ingrese el nombre de los autores separado por comas):
             </label>
-            <input ref={authorsRef} defaultValue={authors} type="text" name="authors" />
+            <input
+              ref={authorsRef}
+              defaultValue={authors}
+              type="text"
+              name="authors"
+            />
           </div>
           <div>
             {" "}
             <label htmlFor="categories">categorias:</label>
-            <input ref={categoriesRef} defaultValue={categories} type="text" name="categories" />
+            <input
+              ref={categoriesRef}
+              defaultValue={categories}
+              type="text"
+              name="categories"
+            />
           </div>
         </div>
         <div className={`${classes.col} ${classes.content}`}>
           <h2>Descripción corta del libro</h2>
-          <textarea defaultValue={shortDescription} ref={shortDescriptionRef} name="shortDescription" rows="10" cols="50">
-            
-          </textarea>
+          <textarea
+            defaultValue={shortDescription}
+            ref={shortDescriptionRef}
+            name="shortDescription"
+            rows="10"
+            cols="50"
+          ></textarea>
           <h2>Descripción larga del libro</h2>
-          <textarea defaultValue={longDescription} ref={longDescriptionRef} name="longDescription" rows="10" cols="50">
-            
-          </textarea>
+          <textarea
+            defaultValue={longDescription}
+            ref={longDescriptionRef}
+            name="longDescription"
+            rows="10"
+            cols="50"
+          ></textarea>
         </div>
         <Button text="Editar" color="blue" />
       </form>

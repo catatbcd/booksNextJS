@@ -19,7 +19,7 @@ function BookContent(props) {
   const [src, setSrc] = useState(thumbnailUrl);
   const [date, setDate] = useState(publishedDate);
   const [description, setDescription] = useState(longDescription);
-  if(!src){
+  if (!src) {
     setSrc("https://randomuser.me/api/portraits/lego/5.jpg");
   }
   if (!description && shortDescription) {
@@ -28,12 +28,14 @@ function BookContent(props) {
     ("No found description");
   }
   let formattedDate;
-  if(date) {formattedDate = new Date(date).toLocaleDateString("en-US", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });}else{
-    formattedDate=null;
+  if (date) {
+    formattedDate = new Date(date).toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  } else {
+    formattedDate = null;
   }
 
   return (
@@ -53,11 +55,16 @@ function BookContent(props) {
           publishedDate={formattedDate}
         />
       </div>
-      {description ? (<div className={`${classes.col} ${classes.content}`}>
-        <h2 className={classes.desT} >Descripción del libro</h2>
-        <div className={classes.des}>
-        <p>{description}</p></div>
-      </div>):""}
+      {description ? (
+        <div className={`${classes.col} ${classes.content}`}>
+          <h2 className={classes.desT}>Descripción del libro</h2>
+          <div className={classes.des}>
+            <p>{description}</p>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

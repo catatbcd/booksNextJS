@@ -15,8 +15,8 @@ function Button(props) {
   const purple = classes.purple;
   const circular = classes.circular;
   const block = classes.block;
-  const right= classes.right;
-  const left= classes.left;
+  const right = classes.right;
+  const left = classes.left;
   let colorClass;
   let formClass;
   let form1Class;
@@ -35,8 +35,8 @@ function Button(props) {
   if (form === "circular") formClass = circular;
   if (form === "block") formClass = block;
   if (form1 === "circular") form1Class = circular;
-  if (pos === "right") posClass= right;
-  if (pos === "left") posClass= left;
+  if (pos === "right") posClass = right;
+  if (pos === "left") posClass = left;
 
   return (
     <button

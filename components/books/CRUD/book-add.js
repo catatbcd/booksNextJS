@@ -4,9 +4,10 @@ import Image from "next/image";
 import Button from "../../ui/button";
 import { useRouter } from "next/router";
 function BookAdd(props) {
-  
   const router = useRouter();
-  const [src, setSrc] = useState("https://randomuser.me/api/portraits/lego/5.jpg");
+  const [src, setSrc] = useState(
+    "https://randomuser.me/api/portraits/lego/5.jpg"
+  );
   const [editImage, setEditImage] = useState(false);
   const titleRef = useRef();
   const authorsRef = useRef();
@@ -25,19 +26,24 @@ function BookAdd(props) {
     handlerEditImage();
   }
   let date = new Date();
- date = date.getFullYear()+ '-' + String(date.getMonth() + 1).padStart(2, '0')+'-'+String(date.getDate()).padStart(2, '0') ;
+  date =
+    date.getFullYear() +
+    "-" +
+    String(date.getMonth() + 1).padStart(2, "0") +
+    "-" +
+    String(date.getDate()).padStart(2, "0");
 
- let formattedDate = new Date(date).toLocaleDateString("en-CA");
+  let formattedDate = new Date(date).toLocaleDateString("en-CA");
 
   async function submitHandler(event) {
     event.preventDefault();
-  
+
     const enteredTitleRef = titleRef.current.value;
     const enteredAuthorsRef = authorsRef.current.value;
-    if(editImage){
-     setSrc(thumbnailUrlRef.current.value)
+    if (editImage) {
+      setSrc(thumbnailUrlRef.current.value);
     }
-    
+
     const enteredShortDescriptionRef = shortDescriptionRef.current.value;
     const enteredLongDescriptionRef = longDescriptionRef.current.value;
     const enteredPublishedDateRef = publishedDateRef.current.value;
@@ -45,12 +51,12 @@ function BookAdd(props) {
     const enteredCategoriesRef = categoriesRef.current.value;
     const enteredPageCountRef = pageCountRef.current.value;
     // optional: Add validation
-    const arrayAuthors = enteredAuthorsRef.split(',');
-    const arrayCatagories = enteredCategoriesRef.split(',');
+    const arrayAuthors = enteredAuthorsRef.split(",");
+    const arrayCatagories = enteredCategoriesRef.split(",");
     try {
       const result = await props.add({
         title: enteredTitleRef,
-        authors:arrayAuthors,
+        authors: arrayAuthors,
         thumbnailUrl: src,
         shortDescription: enteredShortDescriptionRef,
         longDescription: enteredLongDescriptionRef,
@@ -58,13 +64,11 @@ function BookAdd(props) {
         isbn: enteredIsbnRef,
         categories: arrayCatagories,
         pageCount: enteredPageCountRef,
-        
       });
 
       props.result(result.message);
       props.error(null);
-      router.replace("/books/"+result.id);
-      
+      router.replace("/books/" + result.id);
     } catch (error) {
       props.error(error.message);
     }
@@ -88,7 +92,7 @@ function BookAdd(props) {
             <div>
               {" "}
               <label htmlFor="src">agregar imagen:</label>
-              <input  ref={thumbnailUrlRef} type="file" id="src" name="src" />
+              <input ref={thumbnailUrlRef} type="file" id="src" name="src" />
               <Button
                 text="Seleccionar"
                 color="blue"
@@ -103,24 +107,24 @@ function BookAdd(props) {
           <div>
             {" "}
             <label htmlFor="title">* Titulo:</label>
-            <input ref={titleRef}  type="text" name="title" />
+            <input ref={titleRef} type="text" name="title" />
           </div>
           <div>
             {" "}
             <label htmlFor="isbn">isbn:</label>
-            <input ref={isbnRef}  type="text" name="isbn" />
+            <input ref={isbnRef} type="text" name="isbn" />
           </div>
           <div>
             {" "}
             <label htmlFor="pageCount">Numero de paginas:</label>
-            <input ref={pageCountRef}  type="number" name="pageCount" />
+            <input ref={pageCountRef} type="number" name="pageCount" />
           </div>
           <div>
             {" "}
             <label htmlFor="publishedDate">Fecha de publicacion:</label>
             <input
-            defaultValue={formattedDate}
-            ref={publishedDateRef}
+              defaultValue={formattedDate}
+              ref={publishedDateRef}
               type="date"
               name="publishedDate"
             />
@@ -130,7 +134,7 @@ function BookAdd(props) {
             <label htmlFor="authors">
               *Autores (Ingrese el nombre de los autores separado por comas):
             </label>
-            <input ref={authorsRef}  type="text" name="authors" />
+            <input ref={authorsRef} type="text" name="authors" />
           </div>
           <div>
             {" "}
@@ -140,13 +144,19 @@ function BookAdd(props) {
         </div>
         <div className={`${classes.col} ${classes.content}`}>
           <h2>Descripción corta del libro</h2>
-          <textarea  ref={shortDescriptionRef} name="shortDescription" rows="10" cols="50">
-            
-          </textarea>
+          <textarea
+            ref={shortDescriptionRef}
+            name="shortDescription"
+            rows="10"
+            cols="50"
+          ></textarea>
           <h2>Descripción larga del libro</h2>
-          <textarea  ref={longDescriptionRef} name="longDescription" rows="10" cols="50">
-            
-          </textarea>
+          <textarea
+            ref={longDescriptionRef}
+            name="longDescription"
+            rows="10"
+            cols="50"
+          ></textarea>
         </div>
         <Button text="Agregar" color="blue" />
       </form>

@@ -65,7 +65,6 @@
   list-style: none;
   margin: 0;
   padding: 0;
- 
 }
 
 .container .navbar ul li a {
@@ -91,7 +90,6 @@
 }
 
 .container .navbar ul .close span {
-
   font-size: 1.2rem;
   display: inline-block;
   border: 1px solid #cccccc;
@@ -151,9 +149,9 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    -webkit-transition: left .3s;
-    -o-transition: left .3s;
-    transition: left .3s;
+    -webkit-transition: left 0.3s;
+    -o-transition: left 0.3s;
+    transition: left 0.3s;
   }
 
   .container .navbar ul li a {

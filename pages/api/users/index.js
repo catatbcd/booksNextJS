@@ -18,28 +18,22 @@ async function handler(req, res) {
   if (req.method === "PATCH") {
     const idBook = req.body.idBook;
     const idUSer = req.body.idUser;
-   
 
     const usersCollection = client.db().collection("users");
 
-  
     try {
-    const result = await usersCollection.updateOne(
-      { id: idUSer },
-      {
-        $push: {
-          favorites: idBook
-
-        },
-      }
-    );
-    res.status(200).json({ message: "¡Libro añadido a favoritos!" });
-    }
-    catch{
+      const result = await usersCollection.updateOne(
+        { id: idUSer },
+        {
+          $push: {
+            favorites: idBook,
+          },
+        }
+      );
+      res.status(200).json({ message: "¡Libro añadido a favoritos!" });
+    } catch {
       res.status(500).json({ message: " Error al añadir a favoritos." });
     }
-  
-    
   }
 
   client.close();

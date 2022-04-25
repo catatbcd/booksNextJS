@@ -4,7 +4,6 @@ import MainMenu from "./main-menu";
 import classes from "./layout.module.css";
 
 function Layout(props) {
- 
   return (
     <Fragment>
       <section className={classes.grid1}>
