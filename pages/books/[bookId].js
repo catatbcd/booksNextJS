@@ -57,7 +57,7 @@ async function handlerEdit(bookData) {
 }
 
 export default function BookPage() {
-  const { data: session, status } = useSession();
+  const {data: session} = useSession();
   const router = useRouter();
   const bookId = router.query.bookId;
 
@@ -105,7 +105,7 @@ export default function BookPage() {
     setColorModal("green");
     setTitleModal("Eliminar Libro");
     setBodyModal("¿Esta seguro de que desea Eliminar este libro?");
-    setOkModal(handlerDelete);
+    setOkModal("delete");
     handlerModal();
   }
   function modalFavorite() {
@@ -148,7 +148,7 @@ export default function BookPage() {
 
         {!editBook ? (
           <div>
-            {session && session.user.rol === "admin" ? (
+            {session && session.user.roles === "admin" ? (
               <div>
                 <Button onClick={modalDelete} text="Eliminar" color="red" />
                 <Button onClick={handlerShowEdit} text="Editar" color="blue" />

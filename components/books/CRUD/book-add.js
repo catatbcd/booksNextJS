@@ -1,8 +1,8 @@
 import classes from "../details/book-content.module.css";
 import { useState, useRef } from "react";
-import Image from "next/image";
 import Button from "../../ui/button";
 import { useRouter } from "next/router";
+import UploadImage from "./uploadImage";
 function BookAdd(props) {
   const router = useRouter();
   const [src, setSrc] = useState(
@@ -18,6 +18,23 @@ function BookAdd(props) {
   const isbnRef = useRef();
   const categoriesRef = useRef();
   const pageCountRef = useRef();
+  const uploadImage = async e => {
+    const files = e.target.files
+    const data = new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'booksjs')
+    const res = await fetch(
+      'https://api.cloudinary.com/v1_1/dzvqmmme6/image/upload',
+      {
+        method: 'POST',
+        body: data
+      }
+    )
+    const file = await res.json()
+ 
+    setSrc(file.secure_url)
+    handlerEditImage();
+  }
 
   function handlerEditImage() {
     setEditImage(!editImage);
@@ -77,30 +94,7 @@ function BookAdd(props) {
     <div className={classes.section}>
       <form onSubmit={submitHandler}>
         <div className={`${classes.col} ${classes.image}`}>
-          {!editImage ? (
-            <div>
-              <Image src={src} alt="Portada" width={200} height={150} />
-
-              <Button
-                text="Cambiar Imagen"
-                color="gray"
-                form="circular"
-                onClick={handlerEditImage}
-              />
-            </div>
-          ) : (
-            <div>
-              {" "}
-              <label htmlFor="src">agregar imagen:</label>
-              <input ref={thumbnailUrlRef} type="file" id="src" name="src" />
-              <Button
-                text="Seleccionar"
-                color="blue"
-                onClick={handlerEditImage}
-              />
-              <Button text="Cancelar" color="red" onClick={handlerEditImage} />
-            </div>
-          )}{" "}
+          <UploadImage setSrc={setSrc} edit={handlerEditImage} editImage={editImage} src={src} />
         </div>
         <div className={`${classes.col} ${classes.header}`}>
           {" "}

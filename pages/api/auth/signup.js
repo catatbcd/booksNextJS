@@ -1,5 +1,9 @@
 import { hashPassword } from "../../../lib/auth";
-import { connectToDatabase } from "../../../lib/db";
+import {
+  connectToDatabase,
+  findOneDocumentByEmail,
+  insertOne,
+} from "../../../lib/db";
 import { uuid } from "uuidv4";
 
 async function handler(req, res) {
@@ -25,9 +29,7 @@ async function handler(req, res) {
 
   const client = await connectToDatabase();
 
-  const db = client.db();
-
-  const existingUser = await db.collection("users").findOne({ email: email });
+  const existingUser = await findOneDocumentByEmail(client, "users", email);
 
   if (existingUser) {
     res.status(422).json({ message: "El usuario ya existe!" });
@@ -37,7 +39,7 @@ async function handler(req, res) {
 
   const hashedPassword = await hashPassword(password);
 
-  const result = await db.collection("users").insertOne({
+  const result = await insertOne(client, "users", {
     id: uuid(),
     email: email,
     password: hashedPassword,

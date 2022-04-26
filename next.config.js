@@ -11,7 +11,7 @@ const nextConfig = (phase) => {
       },
       reactStrictMode: true,
       images: {
-        domains: ["namespaceit.com","randomuser.me", "s3.amazonaws.com"],
+        domains: ["namespaceit.com","randomuser.me", "s3.amazonaws.com", "res.cloudinary.com"],
       },
     };
   }

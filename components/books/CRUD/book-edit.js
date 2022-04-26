@@ -1,6 +1,6 @@
 import classes from "../details/book-content.module.css";
 import { useState, useRef } from "react";
-import Image from "next/image";
+import UploadImage from "./uploadImage";
 import Button from "../../ui/button";
 function BookEdit(props) {
   const {
@@ -84,30 +84,7 @@ function BookEdit(props) {
     <div className={classes.section}>
       <form onSubmit={submitHandler}>
         <div className={`${classes.col} ${classes.image}`}>
-          {!editImage ? (
-            <div>
-              <Image src={src} alt={title} width={200} height={150} />
-
-              <Button
-                text="Cambiar Imagen"
-                color="gray"
-                form="circular"
-                onClick={handlerEditImage}
-              />
-            </div>
-          ) : (
-            <div>
-              {" "}
-              <label htmlFor="src">agregar imagen:</label>
-              <input ref={thumbnailUrlRef} type="file" id="src" name="src" />
-              <Button
-                text="Seleccionar"
-                color="blue"
-                onClick={handlerEditImage}
-              />
-              <Button text="Cancelar" color="red" onClick={handlerEditImage} />
-            </div>
-          )}{" "}
+        <UploadImage setSrc={setSrc} edit={handlerEditImage} editImage={editImage} src={src} />{" "}
         </div>
         <div className={`${classes.col} ${classes.header}`}>
           {" "}

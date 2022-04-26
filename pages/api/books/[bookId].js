@@ -2,6 +2,7 @@ import {
   connectToDatabase,
   findOneDocument,
   findOneAndDelete,
+  updateOne
 } from "../../../lib/db";
 async function handler(req, res) {
   const bookId = parseInt(req.query.bookId);
@@ -32,9 +33,7 @@ async function handler(req, res) {
     const authors = req.body.authors;
     const categories = req.body.categories;
 
-    const booksCollection = client.db().collection("books");
-
-    const book = await booksCollection.findOne({ id: bookId });
+    const book  = await findOneDocument(client, "books", bookId);
 
     if (!book) {
       res.status(404).json({ message: "Libro no encontrado." });
@@ -42,10 +41,8 @@ async function handler(req, res) {
       return;
     }
     try {
-      const result = await booksCollection.updateOne(
-        { id: bookId },
-        {
-          $set: {
+      const result = await updateOne( client, "books", bookId,{
+        
             title: title,
             isbn: isbn,
             pageCount: pageCount,
@@ -54,9 +51,8 @@ async function handler(req, res) {
             shortDescription: shortDescription,
             longDescription: longDescription,
             authors: authors,
-            categories: categories,
-          },
-        }
+            categories: categories,}
+         
       );
       res.status(200).json({ message: "¡Libro actualizado!" });
     } catch {

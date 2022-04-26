@@ -73,7 +73,7 @@ function BooksPage() {
       ) : (
         <div>
           {" "}
-          {session && session.user.rol === "admin" ? (
+          {session && session.user.roles === "admin" ? (
             <Button
               onClick={handlerShowAdd}
               text="Agregar Libro"

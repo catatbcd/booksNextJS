@@ -1,4 +1,9 @@
-import { connectToDatabase, getAllDocuments, insertOne } from "../../../lib/db";
+import {
+  connectToDatabase,
+  getAllDocuments,
+  insertOne,
+  findOneDocument,
+} from "../../../lib/db";
 async function handler(req, res) {
   let client;
   try {
@@ -26,10 +31,9 @@ async function handler(req, res) {
     const authors = req.body.authors;
     const categories = req.body.categories;
 
-    const booksCollection = client.db().collection("books");
     let newId = Math.floor(Math.random() * (10000 - 1 + 1) + 1);
 
-    const id = await booksCollection.findOne({ id: newId });
+    const id = await findOneDocument(client, "books", newId);
     if (id) {
       newId = Math.floor(Math.random() * (10000 - 1 + 1) + 1);
     }
