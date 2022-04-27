@@ -133,7 +133,7 @@ export default function BookPage() {
                 ? bookId
                 : { idBook: bookId, idUser: session.user.id }
             }
-            url={okModal === "delete" ? "/books" : "users/favorites"}
+            url={okModal === "delete" ? "/books" : "../users/favorites"}
             text={textModal}
             color={colorModal}
             buttonX={handlerModal}

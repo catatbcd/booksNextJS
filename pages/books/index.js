@@ -85,7 +85,7 @@ function BooksPage() {
             ""
           )}
           <h1>Catalogo de libros</h1>
-          <BooksGrid books={data} />
+          <BooksGrid books={data}  />
         </div>
       )}
     </div>

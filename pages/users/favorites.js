@@ -1,7 +1,10 @@
 import { getSession } from "next-auth/react";
 import { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Head from "next/head";
+import BooksGrid from "../../components/books/books-grid";
 export default function UserBooksPage(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -22,7 +25,7 @@ export default function UserBooksPage(props) {
   }, [data, isLoading, result, error]);
 
   const retrieveProfile = () => {
-    fetch("/api/users/profile", {
+    fetch("/api/users", {
       method: "POST",
       body: JSON.stringify({ id }),
       headers: {
@@ -33,7 +36,7 @@ export default function UserBooksPage(props) {
       .catch((error) => setError(error))
       .then((data) => {
         setIsLoading(!isLoading);
-        setData(data.user);
+        setData(data.favorites);
       });
   };
 
@@ -47,13 +50,11 @@ export default function UserBooksPage(props) {
       </Head>
       <h1>Lista de libros del usuario</h1>
 
-      {data.favorites
-        ? data.favorites.map((u, index) => (
-            <div key={index}>
-              <a href={`../books/${u}`}>/books/{u}</a>
-            </div>
-          ))
-        : "No hay libros guardados en favoritos"}
+      {data ? (
+        <BooksGrid books={data} />
+      ) : (
+        "No hay libros guardados en favoritos"
+      )}
     </div>
   );
 }
