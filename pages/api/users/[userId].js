@@ -10,13 +10,13 @@ async function handler(req, res) {
   }
  const usersCollection = client.db().collection("users");
   if (req.method === "PATCH") {
-   
+    const id = req.body.id;
   const name = req.body.name;
   const roles = req.body.roles;
   const email = req.body.email;
 
 
-    const user = await usersCollection.findOne({ id: userId });
+    const user = await usersCollection.findOne({ id: id });
 
     if (!user) {
       res.status(404).json({ message: "Usuario no encontrado." });

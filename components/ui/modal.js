@@ -8,6 +8,7 @@ function Modal(props) {
     try {
       const result = await props.ok(props.id);
       props.setResult(result.message);
+      props.isLoading();
       if (props.url) router.replace(props.url);
       else props.buttonX();
     } catch (error) {
