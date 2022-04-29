@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Fragment } from "react";
-import classes from "./footer.module.css";
+import classes from "../../styles/footer.module.css";
 import Image from "next/image";
 
 function Footer() {

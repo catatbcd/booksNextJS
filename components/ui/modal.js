@@ -1,15 +1,16 @@
 import Button from "./button";
-import classes from "./modal.module.css";
+import classes from "../../styles/modal.module.css";
 import { useRouter } from "next/router";
 
 function Modal(props) {
+  const {url}=props;
   const router = useRouter();
   async function ok() {
     try {
       const result = await props.ok(props.id);
       props.setResult(result.message);
       props.isLoading();
-      if (props.url) router.replace(props.url);
+      if (props.type=== "delete") router.replace("/books");
       else props.buttonX();
     } catch (error) {
       props.setError(error.message);

@@ -72,11 +72,13 @@ export default function BookPage() {
   const [titleModal, setTitleModal] = useState("");
   const [bodyModal, setBodyModal] = useState("");
   const [okModal, setOkModal] = useState("");
-
+function handlerLoading(){
+  setIsLoading(!isLoading);
+}
   function handlerModal() {
     setShowModal(!showModal);
   }
-
+console.log(okModal);
   useEffect(() => {
     if (result) {
       toast.success(result);
@@ -100,18 +102,18 @@ export default function BookPage() {
   function handlerShowEdit() {
     setEditBook(!editBook);
   }
-  function modalDelete() {
+  function modalDelete(title) {
     setTextModal("borrar");
     setColorModal("green");
-    setTitleModal("Eliminar Libro");
+    setTitleModal("Eliminar Libro: " + title);
     setBodyModal("¿Esta seguro de que desea Eliminar este libro?");
     setOkModal("delete");
     handlerModal();
   }
-  function modalFavorite() {
+  function modalFavorite(title) {
     setTextModal("ok");
     setColorModal("green");
-    setTitleModal("Agregar a favoritos");
+    setTitleModal("Agregar " + title + " a favoritos");
     setBodyModal("¿Esta seguro de que desea agregar a favoritos este libro?");
     setOkModal("favorite");
     handlerModal();
@@ -133,7 +135,6 @@ export default function BookPage() {
                 ? bookId
                 : { idBook: bookId, idUser: session.user.id }
             }
-            url={okModal === "delete" ? "/books" : "../users/favorites"}
             text={textModal}
             color={colorModal}
             buttonX={handlerModal}
@@ -143,6 +144,8 @@ export default function BookPage() {
             ok={okModal === "delete" ? handlerDelete : handlerFavorite}
             setResult={setResult}
             setError={setError}
+            type={okModal}
+            isLoading={handlerLoading}
           />
         )}
 
@@ -150,12 +153,12 @@ export default function BookPage() {
           <div>
             {session && session.user.roles === "admin" ? (
               <div>
-                <Button onClick={modalDelete} text="Eliminar" color="red" />
+                <Button onClick={() => modalDelete(data.title, "/books")} text="Eliminar" color="red" />
                 <Button onClick={handlerShowEdit} text="Editar" color="blue" />
               </div>
             ) : (
               <Button
-                onClick={modalFavorite}
+                onClick={() => modalFavorite(data.title, "../users/favorites")}
                 text="Agregar a favoritos"
                 color="green"
               />

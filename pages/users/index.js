@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Head from "next/head";
+import Admin from "../protected";
 
 async function handlerDelete(id) {
   const response = await fetch("/api/users/" + id, {
@@ -68,6 +69,7 @@ export default function UsersPage() {
 
   return (
     <div>
+      <Admin>
       <ToastContainer></ToastContainer>
       <Head>
         <title>Lista de usuarios</title>
@@ -81,7 +83,8 @@ export default function UsersPage() {
         delete={handlerDelete}
         edit={handlerEdit}
         isLoading={loading}
-      />
+      /></Admin>
     </div>
+    
   );
 }

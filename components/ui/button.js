@@ -1,4 +1,4 @@
-import classes from "./button.module.css";
+import classes from "../../styles/button.module.css";
 function Button(props) {
   const { color, form, form1, pos } = props;
   /* Colours */

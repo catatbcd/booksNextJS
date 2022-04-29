@@ -1,4 +1,4 @@
-import classes from "./profile.module.css";
+import classes from "../../styles/profile.module.css";
 import { FaLock, FaKey } from "react-icons/fa";
 import { Fragment, useRef } from "react";
 import Button from "../ui/button";

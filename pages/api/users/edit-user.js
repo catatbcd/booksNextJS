@@ -38,7 +38,7 @@ async function handler(req, res) {
   );
 
   client.close();
-  res.status(200).json({ message: "¡Perfil actualizado!" });
+  res.status(200).json({ message: "¡Usuario actualizado!" });
 }
 
 export default handler;

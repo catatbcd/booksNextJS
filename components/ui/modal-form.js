@@ -1,10 +1,10 @@
 import Button from "./button";
-import classes from "./modal.module.css";
+import classes from "../../styles/modal.module.css";
 import { useState, useRef } from "react";
 
 function ModalForm(props) {
   const { name, email, roles, id } = props.user;
-  const [selected, setSelected] = useState(roles);
+  const [selected, setSelected] = useState("user");
 
   const handleClick = (radio) => (event) => {
     setSelected(radio);

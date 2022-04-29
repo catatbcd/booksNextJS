@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
-import classes from "./book-item.module.css";
+import classes from "../../styles/book-item.module.css";
 
 function Book(props) {
   const {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import classes from "./list-users.module.css";
+import classes from "../../styles/list-users.module.css";
 import Modal from "../ui/modal";
 
 import { FaTrash, FaEdit } from "react-icons/fa";

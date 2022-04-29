@@ -1,4 +1,4 @@
-import classes from "../details/book-content.module.css";
+import classes from "../../../styles/book-content.module.css";
 import { useState, useRef } from "react";
 import Button from "../../ui/button";
 import { useRouter } from "next/router";

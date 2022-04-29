@@ -1,5 +1,5 @@
 import BookItem from "./book-item";
-import classes from "./books-grid.module.css";
+import classes from "../../styles/books-grid.module.css";
 
 function BooksGrid(props) {
   const { books } = props;

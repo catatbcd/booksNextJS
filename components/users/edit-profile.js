@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import classes from "./profile.module.css";
+import classes from "../../styles/profile.module.css";
 import { FaUser, FaEnvelope } from "react-icons/fa";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
@@ -54,6 +54,7 @@ function EditProfile(props) {
       props.showEdit();
     } catch (error) {
       props.setError(error.message);
+      props.setResult(false);
     }
   }
   return (

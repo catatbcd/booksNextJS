@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
-import classes from "./main-menu.module.css";
+import classes from "../../styles/main-menu.module.css";
 import { useState } from "react";
 
 function MainMenu() {

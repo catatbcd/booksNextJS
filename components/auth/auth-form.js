@@ -1,10 +1,9 @@
 import { useState, useRef } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
-import classes from "./auth-form.module.css";
+import classes from "../../styles/auth-form.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import UserPage from "../../pages/users/profile";
 
 async function createUser(email, password) {
   const response = await fetch("/api/auth/signup", {

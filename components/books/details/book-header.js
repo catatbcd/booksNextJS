@@ -1,4 +1,4 @@
-import classes from "./book-header.module.css";
+import classes from "../../../styles/book-header.module.css";
 
 function BookHeader(props) {
   const { title, authors, isbn, categories, pageCount, publishedDate } = props;

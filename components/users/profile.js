@@ -1,5 +1,5 @@
 import Image from "next/image";
-import classes from "./profile.module.css";
+import classes from "../../styles/profile.module.css";
 import { FaUser, FaEnvelope } from "react-icons/fa";
 import Button from "../ui/button";
 
@@ -73,14 +73,14 @@ function Profile(props) {
       <Button
         onClick={props.button}
         text="Editar Perfil"
-        color={"blue"}
+        color={"sky"}
         form={"circular"}
       />
       {!props.show ? (
         <Button
           onClick={props.buttonPass}
           text="Cambiar Contraseña"
-          color={"blue"}
+          color={"purple"}
           form={"circular"}
         />
       ) : (

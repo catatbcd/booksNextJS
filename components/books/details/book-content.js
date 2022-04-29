@@ -1,5 +1,5 @@
 import BookHeader from "./book-header";
-import classes from "./book-content.module.css";
+import classes from "../../../styles/book-content.module.css";
 import { useState } from "react";
 import Image from "next/image";
 
