@@ -2,6 +2,7 @@ import { getSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactLoading from 'react-loading';
 
 import Head from "next/head";
 import BooksGrid from "../../components/books/books-grid";
@@ -41,7 +42,7 @@ export default function UserBooksPage(props) {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <ReactLoading type='bubbles' color='blue' />;
   }
   return (
     <div>

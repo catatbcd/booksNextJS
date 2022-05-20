@@ -2,6 +2,7 @@ import UsersList from "../../components/users/list-users";
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactLoading from 'react-loading';
 
 import Head from "next/head";
 import Admin from "../protected";
@@ -64,7 +65,7 @@ export default function UsersPage() {
     }
   }, [data, isLoading, result, error]);
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <ReactLoading type='bubbles' color='blue' />;
   }
 
   return (

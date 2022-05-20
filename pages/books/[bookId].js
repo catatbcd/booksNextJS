@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
+import ReactLoading from 'react-loading';
 
 async function handlerDelete(id) {
   const response = await fetch("/api/books/" + id, {
@@ -97,7 +98,7 @@ console.log(okModal);
     }
   }, [data, isLoading, bookId]);
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <ReactLoading type='bubbles' color='blue' />;
   }
   function handlerShowEdit() {
     setEditBook(!editBook);

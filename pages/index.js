@@ -3,6 +3,7 @@ import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import AuthForm from "../components/auth/auth-form";
 import Head from "next/head";
+import ReactLoading from 'react-loading';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -19,7 +20,7 @@ export default function Home() {
   }, [router]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <ReactLoading type='bubbles' color='blue' />;
   }
 
   return (

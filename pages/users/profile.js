@@ -5,6 +5,7 @@ import Profile from "../../components/users/profile";
 import ChangePass from "../../components/users/change-pass";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactLoading from 'react-loading';
 
 import Head from "next/head";
 
@@ -92,7 +93,7 @@ export default function UserPage(props) {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <ReactLoading type='bubbles' color='blue' />;
   }
 
   return (

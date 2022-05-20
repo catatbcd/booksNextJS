@@ -5,6 +5,7 @@ import BookAdd from "../../components/books/CRUD/book-add";
 import Button from "../../components/ui/button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactLoading from 'react-loading';
 
 import Head from "next/head";
 
@@ -54,7 +55,7 @@ function BooksPage() {
   }
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <ReactLoading type='bubbles' color='blue' />;
   }
   return (
     <div>
